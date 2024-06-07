@@ -20,11 +20,15 @@ FetchContent_MakeAvailable(raylib)
 
 set(SOURCE_FILES
     "Main.cpp"
+    "Dto/Font.cpp"
+    "Dto/Image.cpp"
     "Dto/Music.cpp"
     "Managers/SystemManager.cpp"
 )
 
 set(HEADER_FILES
+    "Dto/Font.cpp"
+    "Dto/Image.hpp"
     "Dto/Music.hpp"
     "Managers/SystemManager.hpp"
 )

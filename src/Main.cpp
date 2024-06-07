@@ -1,15 +1,15 @@
-#include <iostream>
 #include <raylib.h>
 #include <memory>
-#include <filesystem>
 #include <functional>
 
+#include "Dto/Font.hpp"
+#include "Dto/Image.hpp"
 #include "Dto/Music.hpp"
 
 static constexpr int WindowHeight { 480 };
 static constexpr int WindowWidth { 640 };
 
-int main(int argc, char **argv)
+int main()
 {
     InitWindow(WindowWidth, WindowHeight, "2D Rouge Like");
     SetTargetFPS(60);
@@ -20,6 +20,11 @@ int main(int argc, char **argv)
                 CloseWindow();
                 CloseAudioDevice();
             });
+
+    raylib::dto::Image icon { "assets/raylib_256x256.png" };
+    SetWindowIcon(*icon);
+
+    raylib::dto::Font font;
 
     raylib::dto::Music bgm { "assets/Audio/scavengers_music.aif.wav" };
     bgm.playMusicStream();
@@ -35,7 +40,8 @@ int main(int argc, char **argv)
             } };
 
         ClearBackground({ 255, 255, 255, 255 });
-        DrawText("Hello World", 15, 15, 32, { 0, 0, 0, 255 });
+        // DrawText("Hello World", 15, 15, 32, { 0, 0, 0, 255 });
+        DrawTextEx(font.data(), "Hello World", { 15, 15 }, 32, 0, { 0, 0, 0, 255 });
     }
 
     return 0;

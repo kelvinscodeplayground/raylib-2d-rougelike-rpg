@@ -15,27 +15,29 @@ FetchContent_Declare(
     GIT_TAG "master"
     GIT_PROGRESS TRUE
 )
-
 FetchContent_MakeAvailable(raylib)
+
+FetchContent_Declare(
+    raylib_cpp
+    GIT_REPOSITORY "https://github.com/RobLoach/raylib-cpp.git"
+    GIT_TAG "master"
+    GIT_PROGRESS TRUE
+)
+FetchContent_MakeAvailable(raylib_cpp)
 
 set(SOURCE_FILES
     "Main.cpp"
-    "Dto/Font.cpp"
-    "Dto/Image.cpp"
-    "Dto/Music.cpp"
     "Managers/SystemManager.cpp"
 )
 
 set(HEADER_FILES
-    "Dto/Font.cpp"
-    "Dto/Image.hpp"
-    "Dto/Music.hpp"
     "Managers/SystemManager.hpp"
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
 target_link_libraries(${PROJECT_NAME} PRIVATE
 raylib
+raylib_cpp
 )
 
 # Setting ASSETS_PATH

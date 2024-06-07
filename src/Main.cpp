@@ -2,44 +2,37 @@
 #include <raylib.h>
 #include <memory>
 #include <filesystem>
+#include <functional>
 
 #include "Dto/Music.hpp"
 
-struct Window
-{
-    Window()
-    {
-        InitWindow(Window::WindowWidth, Window::WindowHeight, "2D Rouge Like");
-        SetTargetFPS(60);
-        InitAudioDevice();
-    }
-
-    ~Window()
-    {
-        CloseWindow();
-        CloseAudioDevice();
-    }
-
-    static constexpr int WindowHeight { 480 };
-    static constexpr int WindowWidth { 640 };
-};
-
-struct Painter
-{
-    Painter() { BeginDrawing(); }
-    ~Painter() { EndDrawing(); }
-};
+static constexpr int WindowHeight { 480 };
+static constexpr int WindowWidth { 640 };
 
 int main(int argc, char **argv)
 {
-    Window window;
+    InitWindow(WindowWidth, WindowHeight, "2D Rouge Like");
+    SetTargetFPS(60);
+    InitAudioDevice();
+    auto windowHandler =
+            std::unique_ptr<uint8_t, std::function<void(uint8_t *)>>(new uint8_t, [](uint8_t *ptr) {
+                delete ptr;
+                CloseWindow();
+                CloseAudioDevice();
+            });
 
     raylib::dto::Music bgm { "assets/Audio/scavengers_music.aif.wav" };
     bgm.playMusicStream();
 
     while (!WindowShouldClose()) {
         bgm.updateMusicStream();
-        Painter painter;
+
+        BeginDrawing();
+        auto painter = std::unique_ptr<uint8_t, std::function<void(uint8_t *)>> { new uint8_t,
+            [](uint8_t *ptr) {
+                delete ptr;
+                EndDrawing();
+            } };
 
         ClearBackground({ 255, 255, 255, 255 });
         DrawText("Hello World", 15, 15, 32, { 0, 0, 0, 255 });

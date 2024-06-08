@@ -15,7 +15,6 @@ FetchContent_Declare(
     GIT_TAG "master"
     GIT_PROGRESS TRUE
 )
-FetchContent_MakeAvailable(raylib)
 
 FetchContent_Declare(
     raylib_cpp
@@ -23,7 +22,19 @@ FetchContent_Declare(
     GIT_TAG "master"
     GIT_PROGRESS TRUE
 )
-FetchContent_MakeAvailable(raylib_cpp)
+
+FetchContent_Declare(
+    scope_guard
+    GIT_REPOSITORY "https://github.com/ricab/scope_guard.git"
+    GIT_TAG "origin/main"
+    GIT_PROGRESS TRUE
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ""
+)
+
+FetchContent_MakeAvailable(raylib raylib_cpp scope_guard)
+
+include_directories(${scope_guard_SOURCE_DIR})
 
 set(SOURCE_FILES
     "Main.cpp"

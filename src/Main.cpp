@@ -1,7 +1,7 @@
-#include <memory>
-#include <functional>
+#include <format>
 
 #include <raylib-cpp.hpp>
+#include <scope_guard.hpp>
 
 static constexpr int WindowHeight { 480 };
 static constexpr int WindowWidth { 640 };
@@ -16,8 +16,6 @@ int main()
     window.SetTargetFPS(60);
     window.SetIcon(icon);
 
-    // raylib::dto::Music bgm { "assets/Audio/scavengers_music.aif.wav" };
-    // bgm.playMusicStream();
     raylib::Music bgm { "assets/Audio/scavengers_music.aif.wav" };
     bgm.Play();
 
@@ -25,15 +23,13 @@ int main()
         bgm.Update();
 
         window.BeginDrawing();
-        auto painter = std::unique_ptr<uint8_t, std::function<void(uint8_t *)>> { new uint8_t,
-            [&window](uint8_t *ptr) {
-                delete ptr;
-                window.EndDrawing();
-            } };
+        auto painterGuard = sg::make_scope_guard([&]() { window.EndDrawing(); });
 
         window.ClearBackground({ 255, 255, 255, 255 });
-        // DrawText("Hello World", 15, 15, 32, { 0, 0, 0, 255 });
         raylib::Color::Black().DrawText(font, "Hello World", { 15, 15 }, 32, 1);
+        raylib::Color::Black().DrawText(font,
+                std::format("Window size is {}x{}", WindowWidth, WindowHeight), { 15, 15 + 32 }, 16,
+                1);
     }
 
     return 0;

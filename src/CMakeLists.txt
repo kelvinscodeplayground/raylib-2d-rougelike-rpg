@@ -38,11 +38,16 @@ include_directories(${scope_guard_SOURCE_DIR})
 
 set(SOURCE_FILES
     "Main.cpp"
+    "Managers/SceneManager.cpp"
     "Managers/SystemManager.cpp"
+    "Scenes/Board.cpp"
 )
 
 set(HEADER_FILES
+    "Managers/SceneManager.hpp"
     "Managers/SystemManager.hpp"
+    "Scenes/Board.hpp"
+    "Scenes/Scene.hpp"
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})

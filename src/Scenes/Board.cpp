@@ -35,6 +35,7 @@ void scenes::Board::tick()
 
 void scenes::Board::draw()
 {
+    const auto tileSize = consts::tiles::tileSize;
     auto &system = managers::SystemManager::getInstance();
     auto &font = system.getDefaultFont();
     auto &texture = system.getTexture();
@@ -45,4 +46,17 @@ void scenes::Board::draw()
         raylib::Rectangle wallSrcRect { hardWallTiles[std::get<1>(wall)] };
         texture.Draw(wallSrcRect, wallPos);
     }
+
+    for (int j = 1; j < 9; j++) {
+        for (int i = 1; i < 9; i++) {
+            if (j == 1 && i == 8) continue;
+
+            texture.Draw(raylib::Rectangle { 0, 4 * tileSize, tileSize, tileSize },
+                    raylib::Vector2 {
+                            static_cast<float>(i * tileSize), static_cast<float>(j * tileSize) });
+        }
+    }
+
+    texture.Draw(consts::tiles::exit,
+            raylib::Vector2 { 8 * consts::tiles::tileSize, 1 * consts::tiles::tileSize });
 }

@@ -15,12 +15,18 @@ int main()
 
     managers::SceneManager::getInstance().apply(std::make_unique<scenes::Board>());
 
+    raylib::Camera2D camera { { 0, 0 }, { 0, 0 } };
+    camera.SetZoom(2.f);
+
     while (!window.ShouldClose()) {
         window.BeginDrawing();
         auto painterGuard = sg::make_scope_guard([&]() { window.EndDrawing(); });
         window.ClearBackground(raylib::Color::Black());
+
+        camera.BeginMode();
         managers::SceneManager::getInstance().tick();
         managers::SceneManager::getInstance().draw();
+        camera.EndMode();
     }
 
     return 0;

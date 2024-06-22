@@ -1,11 +1,30 @@
 #include "Board.hpp"
 
 #include <format>
+#include <random>
 
+#include "Consts/Tiles.hpp"
 #include "Managers/SystemManager.hpp"
 
 scenes::Board::Board()
 {
+    std::random_device rd;
+    std::mt19937 re { rd() };
+    std::uniform_int_distribution<int> dist { 0,
+        static_cast<int>(consts::tiles::hardWalls.size()) - 1 };
+
+    int wallCount = 0;
+    for (int wallY = 0; wallY < 10; wallY++) {
+        for (int wallX = 0; wallX < 10; wallX++) {
+            if (wallY != 0 && wallY != 9 && wallX != 0 && wallX != 9) continue;
+
+            hardWalls[wallCount++] = std::make_tuple(
+                    raylib::Vector2 { static_cast<float>(wallX * consts::tiles::tileSize),
+                            static_cast<float>(wallY * consts::tiles::tileSize) },
+                    dist(re));
+        }
+    }
+
     bgm.Play();
 }
 
@@ -16,11 +35,14 @@ void scenes::Board::tick()
 
 void scenes::Board::draw()
 {
-    auto &font = managers::SystemManager::getInstance().getDefaultFont();
-    auto WindowWidth = managers::SystemManager::WindowWidth;
-    auto WindowHeight = managers::SystemManager::WindowHeight;
+    auto &system = managers::SystemManager::getInstance();
+    auto &font = system.getDefaultFont();
+    auto &texture = system.getTexture();
+    auto &hardWallTiles = consts::tiles::hardWalls;
 
-    raylib::Color::Black().DrawText(font, "Hello World", { 15, 15 }, 32, 1);
-    raylib::Color::Black().DrawText(font,
-            std::format("Window size is {}x{}", WindowWidth, WindowHeight), { 15, 15 + 32 }, 16, 1);
+    for (const auto &wall : hardWalls) {
+        const auto &wallPos = std::get<0>(wall);
+        raylib::Rectangle wallSrcRect { hardWallTiles[std::get<1>(wall)] };
+        texture.Draw(wallSrcRect, wallPos);
+    }
 }

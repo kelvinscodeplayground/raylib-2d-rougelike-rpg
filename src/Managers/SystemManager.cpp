@@ -19,6 +19,11 @@ raylib::Font &managers::SystemManager::getDefaultFont()
     return font;
 }
 
+raylib::Texture2D &SystemManager::getTexture()
+{
+    return texture;
+}
+
 SystemManager &SystemManager::getInstance()
 {
     static SystemManager instance;

@@ -18,7 +18,7 @@ int main()
     while (!window.ShouldClose()) {
         window.BeginDrawing();
         auto painterGuard = sg::make_scope_guard([&]() { window.EndDrawing(); });
-        window.ClearBackground({ 255, 255, 255, 255 });
+        window.ClearBackground(raylib::Color::Black());
         managers::SceneManager::getInstance().tick();
         managers::SceneManager::getInstance().draw();
     }

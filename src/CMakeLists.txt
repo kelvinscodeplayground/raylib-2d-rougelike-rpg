@@ -44,6 +44,7 @@ set(SOURCE_FILES
 )
 
 set(HEADER_FILES
+    "Consts/Tiles.hpp"
     "Managers/SceneManager.hpp"
     "Managers/SystemManager.hpp"
     "Scenes/Board.hpp"

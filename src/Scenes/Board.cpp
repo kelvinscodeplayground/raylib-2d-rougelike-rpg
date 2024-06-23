@@ -45,6 +45,8 @@ void scenes::Board::draw()
             i->draw();
         }
     }
+
+    texture.Draw(consts::tiles::exit, raylib::Vector2 { 8 * 32, 1 * 32 });
 }
 
 void scenes::Board::initBoard()
@@ -70,6 +72,8 @@ void scenes::Board::initBoard()
     for (auto &j : grid) {
         int gridX = 1;
         for (auto &i : j) {
+            if (gridX == 8 && gridY == 1) continue;
+
             std::uniform_int_distribution<int> dist { 0,
                 static_cast<int>(consts::tiles::floors.size() - 1) };
             i = std::make_unique<game_objects::Floor>(

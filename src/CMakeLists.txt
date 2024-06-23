@@ -38,6 +38,7 @@ include_directories(${scope_guard_SOURCE_DIR})
 
 set(SOURCE_FILES
     "Main.cpp"
+    "GameObjects/Enemy.cpp"
     "GameObjects/Floor.cpp"
     "GameObjects/Food.cpp"
     "GameObjects/Soda.cpp"
@@ -50,6 +51,7 @@ set(SOURCE_FILES
 
 set(HEADER_FILES
     "Consts/Tiles.hpp"
+    "GameObjects/Enemy.hpp"
     "GameObjects/Floor.hpp"
     "GameObjects/Food.hpp"
     "GameObjects/GameObject.hpp"

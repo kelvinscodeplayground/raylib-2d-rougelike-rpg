@@ -58,6 +58,24 @@ namespace player {
         { 7 * tileSize, 5 * tileSize, tileSize, tileSize }
     }};
 }
+
+namespace enemy {
+    namespace varian1 {
+        const std::array<raylib::Rectangle, 6> idle {{
+            { 6 * tileSize, 0, tileSize, tileSize },
+            { 7 * tileSize, 0, tileSize, tileSize },
+            { 0, 1 * tileSize, tileSize, tileSize },
+            { 1 * tileSize, 1 * tileSize, tileSize, tileSize },
+            { 2 * tileSize, 1 * tileSize, tileSize, tileSize },
+            { 3 * tileSize, 1 * tileSize, tileSize, tileSize }
+        }};
+
+        const std::array<raylib::Rectangle, 2> attack {{
+            { 2 * tileSize, 5 * tileSize, tileSize, tileSize },
+            { 3 * tileSize, 5 * tileSize, tileSize, tileSize }
+        }};
+    }
+}
 // clang-format on
 }
 }

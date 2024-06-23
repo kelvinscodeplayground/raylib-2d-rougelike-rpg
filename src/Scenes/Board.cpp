@@ -4,6 +4,7 @@
 #include <random>
 
 #include "Consts/Tiles.hpp"
+#include "GameObjects/Enemy.hpp"
 #include "GameObjects/Floor.hpp"
 #include "GameObjects/Food.hpp"
 #include "GameObjects/Soda.hpp"
@@ -119,4 +120,10 @@ void scenes::Board::initBoard()
         else
             grid[j][i] = std::make_unique<game_objects::Soda>(selectedPos * 32);
     }
+
+    const auto enemyPos = floorPositions.back();
+    floorPositions.pop_back();
+
+    grid[static_cast<int>(enemyPos.GetY())][static_cast<int>(enemyPos.GetX())] =
+            std::make_unique<game_objects::Enemy>(0, enemyPos * 32);
 }

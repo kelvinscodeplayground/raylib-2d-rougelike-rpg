@@ -13,7 +13,6 @@ const std::array<raylib::Rectangle, 3> hardWalls {{
     raylib::Rectangle { 2 * tileSize, 3 * tileSize, tileSize, tileSize },
     raylib::Rectangle { 4 * tileSize, 3 * tileSize, tileSize, tileSize }
 }};
-
 const std::array<raylib::Rectangle, 8> walls {{
     raylib::Rectangle { 5 * tileSize, 2 * tileSize, tileSize, tileSize },
     raylib::Rectangle { 6 * tileSize, 2 * tileSize, tileSize, tileSize },
@@ -23,6 +22,16 @@ const std::array<raylib::Rectangle, 8> walls {{
     raylib::Rectangle { 5 * tileSize, 3 * tileSize, tileSize, tileSize },
     raylib::Rectangle { 6 * tileSize, 3 * tileSize, tileSize, tileSize },
     raylib::Rectangle { 7 * tileSize, 3 * tileSize, tileSize, tileSize }
+}};
+const std::array<raylib::Rectangle, 8> floors {{
+    { 0, 4 * tileSize, tileSize, tileSize },
+    { 1 * tileSize, 4 * tileSize, tileSize, tileSize },
+    { 2 * tileSize, 4 * tileSize, tileSize, tileSize },
+    { 3 * tileSize, 4 * tileSize, tileSize, tileSize },
+    { 4 * tileSize, 4 * tileSize, tileSize, tileSize },
+    { 5 * tileSize, 4 * tileSize, tileSize, tileSize },
+    { 6 * tileSize, 4 * tileSize, tileSize, tileSize },
+    { 7 * tileSize, 4 * tileSize, tileSize, tileSize }
 }};
 // clang-format on
 

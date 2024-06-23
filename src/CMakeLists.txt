@@ -38,6 +38,7 @@ include_directories(${scope_guard_SOURCE_DIR})
 
 set(SOURCE_FILES
     "Main.cpp"
+    "GameObjects/Floor.cpp"
     "GameObjects/Wall.cpp"
     "Managers/CameraManager.cpp"
     "Managers/SceneManager.cpp"
@@ -47,6 +48,7 @@ set(SOURCE_FILES
 
 set(HEADER_FILES
     "Consts/Tiles.hpp"
+    "GameObjects/Floor.hpp"
     "GameObjects/GameObject.hpp"
     "GameObjects/Wall.hpp"
     "Managers/CameraManager.hpp"

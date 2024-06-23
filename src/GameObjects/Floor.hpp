@@ -4,17 +4,18 @@
 #include "GameObjects/GameObject.hpp"
 
 namespace game_objects {
-class Wall : public game_objects::GameObject
+class Floor : public GameObject
 {
 public:
-    Wall(size_t tileIndex = 0, raylib::Vector2 position = { 0, 0 });
+    Floor(size_t tileIndex = 0, raylib::Vector2 position = { 0, 0 });
+
     virtual void tick() override;
     virtual void draw() override;
 
-    virtual ~Wall() override {};
+    virtual ~Floor() override {};
 
 private:
     const raylib::Rectangle *tile { nullptr };
-    const raylib::Vector2 position { 0, 0 };
+    raylib::Vector2 position {};
 };
 }

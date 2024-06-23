@@ -19,8 +19,11 @@ public:
     void draw() override;
 
 private:
+    void initBoard();
+
+private:
     raylib::Music bgm { "assets/Audio/scavengers_music.aif.wav" };
     std::array<std::tuple<raylib::Vector2, size_t>, 36> hardWalls;
-    std::array<std::array<std::unique_ptr<game_objects::GameObject>, 9>, 9> grid;
+    std::array<std::array<std::unique_ptr<game_objects::GameObject>, 8>, 8> grid;
 };
 }

@@ -112,16 +112,11 @@ void scenes::Board::initBoard()
 
         const auto i = static_cast<int>(selectedPos.GetX());
         const auto j = static_cast<int>(selectedPos.GetY());
-        grid[j][i] = std::make_unique<game_objects::Food>(selectedPos * 32);
-    }
 
-    const auto sodaCount = std::uniform_int_distribution<int> { 1, 5 }(mt);
-    for (int count = 0; count < sodaCount; count++) {
-        const auto selectedPos = floorPositions.back();
-        floorPositions.pop_back();
-
-        const auto i = static_cast<int>(selectedPos.GetX());
-        const auto j = static_cast<int>(selectedPos.GetY());
-        grid[j][i] = std::make_unique<game_objects::Soda>(selectedPos * 32);
+        const auto variant = std::uniform_int_distribution<int> { 1, 2 }(mt);
+        if (variant == 1)
+            grid[j][i] = std::make_unique<game_objects::Food>(selectedPos * 32);
+        else
+            grid[j][i] = std::make_unique<game_objects::Soda>(selectedPos * 32);
     }
 }

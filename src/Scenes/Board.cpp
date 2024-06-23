@@ -30,6 +30,13 @@ scenes::Board::Board()
 
 void scenes::Board::tick()
 {
+    for (const auto &j : grid) {
+        for (const auto &i : j) {
+            if (i == nullptr) continue;
+            i->tick();
+        }
+    }
+
     bgm.Update();
 }
 
@@ -47,13 +54,10 @@ void scenes::Board::draw()
         texture.Draw(wallSrcRect, wallPos);
     }
 
-    for (int j = 1; j < 9; j++) {
-        for (int i = 1; i < 9; i++) {
-            if (j == 1 && i == 8) continue;
-
-            texture.Draw(raylib::Rectangle { 0, 4 * tileSize, tileSize, tileSize },
-                    raylib::Vector2 {
-                            static_cast<float>(i * tileSize), static_cast<float>(j * tileSize) });
+    for (const auto &j : grid) {
+        for (const auto &i : j) {
+            if (i == nullptr) continue;
+            i->draw();
         }
     }
 

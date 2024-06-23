@@ -75,6 +75,17 @@ namespace enemy {
             { 3 * tileSize, 5 * tileSize, tileSize, tileSize }
         }};
     }
+
+    namespace varian2 {
+        const std::array<raylib::Rectangle, 6> idle {{
+            { 4 * tileSize, 1 * tileSize, tileSize, tileSize },
+            { 5 * tileSize, 1 * tileSize, tileSize, tileSize },
+            { 6 * tileSize, 1 * tileSize, tileSize, tileSize },
+            { 7 * tileSize, 1 * tileSize, tileSize, tileSize },
+            { 0, 2 * tileSize, tileSize, tileSize },
+            { 1 * tileSize, 2 * tileSize, tileSize, tileSize }
+        }};
+    }
 }
 // clang-format on
 }

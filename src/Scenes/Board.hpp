@@ -27,5 +27,6 @@ private:
     std::array<std::tuple<raylib::Vector2, size_t>, 36> hardWalls;
     std::array<std::array<std::unique_ptr<game_objects::GameObject>, 8>, 8> grid;
     std::vector<std::unique_ptr<game_objects::GameObject>> floorGrid;
+    int level { 5 };
 };
 }

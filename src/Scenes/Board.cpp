@@ -121,9 +121,13 @@ void scenes::Board::initBoard()
             grid[j][i] = std::make_unique<game_objects::Soda>(selectedPos * 32);
     }
 
-    const auto enemyPos = floorPositions.back();
-    floorPositions.pop_back();
+    const auto enemyCount = static_cast<int>(std::log2(level));
+    for (int count = 0; count < enemyCount; count++) {
+        const auto selectedPos = floorPositions.back();
+        floorPositions.pop_back();
 
-    grid[static_cast<int>(enemyPos.GetY())][static_cast<int>(enemyPos.GetX())] =
-            std::make_unique<game_objects::Enemy>(0, enemyPos * 32);
+        const auto i = static_cast<int>(selectedPos.GetX());
+        const auto j = static_cast<int>(selectedPos.GetY());
+        grid[j][i] = std::make_unique<game_objects::Enemy>(0, selectedPos * 32);
+    }
 }

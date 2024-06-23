@@ -47,6 +47,7 @@ set(SOURCE_FILES
     "Managers/SceneManager.cpp"
     "Managers/SystemManager.cpp"
     "Scenes/Board.cpp"
+    "TimingUtils/Timer.cpp"
 )
 
 set(HEADER_FILES
@@ -62,6 +63,7 @@ set(HEADER_FILES
     "Managers/SystemManager.hpp"
     "Scenes/Board.hpp"
     "Scenes/Scene.hpp"
+    "TimingUtils/Timer.hpp"
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})

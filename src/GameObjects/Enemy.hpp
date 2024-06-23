@@ -1,9 +1,8 @@
 #pragma once
 
-#include <chrono>
-
 #include "Consts/Tiles.hpp"
 #include "GameObjects/GameObject.hpp"
+#include "TimingUtils/Timer.hpp"
 
 namespace game_objects {
 class Enemy : public GameObject
@@ -19,6 +18,6 @@ private:
     const decltype(consts::tiles::enemy::varian1::idle) *tile { nullptr };
     raylib::Vector2 position;
     int frame { 0 };
-    std::chrono::steady_clock::time_point lastTick { std::chrono::steady_clock::now() };
+    timing_utils::Timer spriteTimer;
 };
 }

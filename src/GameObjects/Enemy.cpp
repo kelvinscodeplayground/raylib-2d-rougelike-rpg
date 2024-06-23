@@ -4,6 +4,7 @@
 
 #include "Managers/SystemManager.hpp"
 
+using namespace std::chrono_literals;
 namespace game_objects {
 Enemy::Enemy(size_t variant, raylib::Vector2 position) : position(position)
 {
@@ -18,14 +19,15 @@ Enemy::Enemy(size_t variant, raylib::Vector2 position) : position(position)
         tile = &consts::tiles::enemy::varian1::idle;
     else
         tile = &consts::tiles::enemy::varian2::idle;
+
+    spriteTimer.countDown(150ms);
 }
 
 void Enemy::tick()
 {
-    const auto diff = std::chrono::steady_clock::now() - lastTick;
-    if (diff > std::chrono::milliseconds(150)) {
-        frame = frame >= 5 ? 0 : frame + 1;
-        lastTick = std::chrono::steady_clock::now();
+    if (spriteTimer.isTimedOut()) {
+        frame = frame == 5 ? 0 : frame + 1;
+        spriteTimer.next();
     }
 }
 

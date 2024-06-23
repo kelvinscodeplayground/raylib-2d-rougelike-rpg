@@ -10,6 +10,8 @@ class Timer
 
 public:
     bool isTimedOut();
+    std::chrono::milliseconds delta();
+    long long deltaRatio();
     void reset();
     void next();
     void countDown(const std::chrono::milliseconds duration);

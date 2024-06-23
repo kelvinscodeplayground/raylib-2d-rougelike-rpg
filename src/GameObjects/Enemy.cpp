@@ -26,7 +26,8 @@ Enemy::Enemy(size_t variant, raylib::Vector2 position) : position(position)
 void Enemy::tick()
 {
     if (spriteTimer.isTimedOut()) {
-        frame = frame == 5 ? 0 : frame + 1;
+        const auto delta = spriteTimer.deltaRatio();
+        frame = ++frame % static_cast<int>(tile->size());
         spriteTimer.next();
     }
 }

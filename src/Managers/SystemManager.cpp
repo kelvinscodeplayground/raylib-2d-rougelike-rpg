@@ -9,6 +9,17 @@ void SystemManager::init()
     window.SetIcon(icon);
 }
 
+void SystemManager::checkFullScreen()
+{
+    if (!raylib::Keyboard::IsKeyPressed(KeyboardKey::KEY_F11)) return;
+
+    if (isFullScreen) {
+        window.ToggleBorderless();
+    } else {
+        window.ToggleBorderless();
+    }
+}
+
 raylib::Window &SystemManager::getWindow()
 {
     return window;

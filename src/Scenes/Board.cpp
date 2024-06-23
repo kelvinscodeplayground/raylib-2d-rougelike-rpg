@@ -2,9 +2,11 @@
 
 #include <format>
 #include <random>
+#include <vector>
 
 #include "Consts/Tiles.hpp"
 #include "GameObjects/Floor.hpp"
+#include "GameObjects/Wall.hpp"
 #include "Managers/SystemManager.hpp"
 
 scenes::Board::Board()
@@ -52,9 +54,8 @@ void scenes::Board::draw()
 void scenes::Board::initBoard()
 {
     std::random_device rd;
-    std::mt19937 re { rd() };
-    std::uniform_int_distribution<int> dist { 0,
-        static_cast<int>(consts::tiles::hardWalls.size()) - 1 };
+    std::mt19937 mt(rd());
+    std::srand(rd());
 
     int wallCount = 0;
     for (int wallY = 0; wallY < 10; wallY++) {
@@ -64,22 +65,29 @@ void scenes::Board::initBoard()
             hardWalls[wallCount++] = std::make_tuple(
                     raylib::Vector2 { static_cast<float>(wallX * consts::tiles::tileSize),
                             static_cast<float>(wallY * consts::tiles::tileSize) },
-                    dist(re));
+                    std::rand() % 3);
         }
     }
 
-    int gridY = 1;
-    for (auto &j : grid) {
-        int gridX = 1;
-        for (auto &i : j) {
-            if (gridX == 8 && gridY == 1) continue;
+    std::vector<raylib::Vector2> floorPositions;
 
-            std::uniform_int_distribution<int> dist { 0,
-                static_cast<int>(consts::tiles::floors.size() - 1) };
-            i = std::make_unique<game_objects::Floor>(
-                    dist(re), raylib::Vector2 { gridX * 32.f, gridY * 32.f });
-            gridX++;
+    for (int j = 2; j < 7; j++) {
+        for (int i = 2; i < 7; i++) {
+            floorPositions.emplace_back(
+                    raylib::Vector2 { static_cast<float>(i), static_cast<float>(j) });
         }
-        gridY++;
+    }
+
+    std::shuffle(floorPositions.begin(), floorPositions.end(), mt);
+
+    const auto softWallCount = std::uniform_int_distribution<int> { 5, 9 }(mt);
+    for (int count = 0; count < softWallCount; count++) {
+        const auto selectedPos = floorPositions.back();
+        floorPositions.pop_back();
+
+        const auto i = static_cast<int>(selectedPos.GetX());
+        const auto j = static_cast<int>(selectedPos.GetY());
+
+        grid[j][i] = std::make_unique<game_objects::Wall>(selectedPos * 32);
     }
 }

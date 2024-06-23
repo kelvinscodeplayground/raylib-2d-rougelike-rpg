@@ -1,5 +1,7 @@
 #include "SystemManager.hpp"
 
+#include "Managers/CameraManager.hpp"
+
 namespace managers {
 void SystemManager::init()
 {
@@ -13,11 +15,8 @@ void SystemManager::checkFullScreen()
 {
     if (!raylib::Keyboard::IsKeyPressed(KeyboardKey::KEY_F11)) return;
 
-    if (isFullScreen) {
-        window.ToggleBorderless();
-    } else {
-        window.ToggleBorderless();
-    }
+    window.ToggleBorderless();
+    managers::CameraManager::getInstance().centerWorldCamera();
 }
 
 raylib::Window &SystemManager::getWindow()

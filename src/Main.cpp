@@ -4,6 +4,7 @@
 #include <scope_guard.hpp>
 
 #include "Scenes/Board.hpp"
+#include "Managers/CameraManager.hpp"
 #include "Managers/SceneManager.hpp"
 #include "Managers/SystemManager.hpp"
 
@@ -15,8 +16,7 @@ int main()
 
     managers::SceneManager::getInstance().apply(std::make_unique<scenes::Board>());
 
-    raylib::Camera2D camera { { 640.f / 2.f, 640.f / 2.f }, { 320.f / 2.f, 320.f / 2.f } };
-    camera.SetZoom(2.f);
+    auto &camera = managers::CameraManager::getInstance().getWorldCamera();
 
     while (!window.ShouldClose()) {
         managers::SystemManager::getInstance().checkFullScreen();

@@ -86,9 +86,6 @@ void scenes::Board::initBoard()
     for (int j = 1; j <= 8; j++) {
         for (int i = 1; i <= 8; i++) {
             if (j == 1 && i == 8) continue;
-            if (j != 1 && j != 8) {
-                if (i != 1 && i != 8) continue;
-            }
 
             floorGrid.push_back(
                     std::make_unique<game_objects::Floor>(raylib::Vector2 { 32.f * i, 32.f * j }));
@@ -106,13 +103,6 @@ void scenes::Board::initBoard()
         const auto j = static_cast<int>(selectedPos.GetY());
 
         grid[j][i] = std::make_unique<game_objects::Wall>(selectedPos * 32);
-    }
-
-    for (const auto &pos : floorPositions) {
-        const auto i = static_cast<int>(pos.GetX());
-        const auto j = static_cast<int>(pos.GetY());
-
-        floorGrid.emplace_back(std::make_unique<game_objects::Floor>(pos * 32));
     }
 
     const auto foodCount = std::uniform_int_distribution<int> { 1, 5 }(mt);

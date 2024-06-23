@@ -26,6 +26,5 @@ private:
     raylib::AudioDevice audioDevice;
     raylib::Font font { "assets/Fonts/PressStart2P-Regular.ttf" };
     raylib::Texture2D texture { "assets/Sprites/Scavengers_SpriteSheet.png" };
-    bool isFullScreen { false };
 };
 }

@@ -18,8 +18,8 @@ public:
 
     static SystemManager &getInstance();
 
-    static constexpr int WindowHeight { 640 };
-    static constexpr int WindowWidth { 640 };
+    static constexpr int WindowHeight { 800 };
+    static constexpr int WindowWidth { 800 };
 
 private:
     raylib::Window window { WindowWidth, WindowHeight, "2D Rouge Like" };

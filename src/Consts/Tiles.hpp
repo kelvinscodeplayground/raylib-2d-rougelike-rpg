@@ -36,8 +36,8 @@ const std::array<raylib::Rectangle, 8> floors {{
 // clang-format on
 
 const raylib::Rectangle exit { 4 * tileSize, 2 * tileSize, tileSize, tileSize };
-const raylib::Rectangle food { 3 * tileSize, 2 * tileSize };
-const raylib::Rectangle soda { 2 * tileSize, 3 * tileSize };
+const raylib::Rectangle food { 3 * tileSize, 2 * tileSize, tileSize, tileSize };
+const raylib::Rectangle soda { 2 * tileSize, 2 * tileSize, tileSize, tileSize };
 
 // clang-format off
 namespace player {

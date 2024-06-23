@@ -5,6 +5,8 @@
 
 #include "Consts/Tiles.hpp"
 #include "GameObjects/Floor.hpp"
+#include "GameObjects/Food.hpp"
+#include "GameObjects/Soda.hpp"
 #include "GameObjects/Wall.hpp"
 #include "Managers/SystemManager.hpp"
 
@@ -40,15 +42,15 @@ void scenes::Board::draw()
         texture.Draw(wallSrcRect, wallPos);
     }
 
+    for (auto &i : floorGrid) {
+        i->draw();
+    }
+
     for (const auto &j : grid) {
         for (const auto &i : j) {
             if (i == nullptr) continue;
             i->draw();
         }
-    }
-
-    for (auto &i : floorGrid) {
-        i->draw();
     }
 
     texture.Draw(consts::tiles::exit, raylib::Vector2 { 8 * 32, 1 * 32 });
@@ -111,5 +113,25 @@ void scenes::Board::initBoard()
         const auto j = static_cast<int>(pos.GetY());
 
         floorGrid.emplace_back(std::make_unique<game_objects::Floor>(pos * 32));
+    }
+
+    const auto foodCount = std::uniform_int_distribution<int> { 1, 5 }(mt);
+    for (int count = 0; count < foodCount; count++) {
+        const auto selectedPos = floorPositions.back();
+        floorPositions.pop_back();
+
+        const auto i = static_cast<int>(selectedPos.GetX());
+        const auto j = static_cast<int>(selectedPos.GetY());
+        grid[j][i] = std::make_unique<game_objects::Food>(selectedPos * 32);
+    }
+
+    const auto sodaCount = std::uniform_int_distribution<int> { 1, 5 }(mt);
+    for (int count = 0; count < sodaCount; count++) {
+        const auto selectedPos = floorPositions.back();
+        floorPositions.pop_back();
+
+        const auto i = static_cast<int>(selectedPos.GetX());
+        const auto j = static_cast<int>(selectedPos.GetY());
+        grid[j][i] = std::make_unique<game_objects::Soda>(selectedPos * 32);
     }
 }

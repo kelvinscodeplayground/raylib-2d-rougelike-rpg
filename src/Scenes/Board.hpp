@@ -4,6 +4,7 @@
 #include <array>
 #include <memory>
 #include <tuple>
+#include <vector>
 
 #include <raylib-cpp.hpp>
 
@@ -25,5 +26,6 @@ private:
     raylib::Music bgm { "assets/Audio/scavengers_music.aif.wav" };
     std::array<std::tuple<raylib::Vector2, size_t>, 36> hardWalls;
     std::array<std::array<std::unique_ptr<game_objects::GameObject>, 8>, 8> grid;
+    std::vector<std::unique_ptr<game_objects::GameObject>> floorGrid;
 };
 }
